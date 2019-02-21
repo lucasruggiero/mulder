@@ -39,6 +39,7 @@ var (
 		"What can I do about a Lie with an Official Seal on it?",
 		"Aliens!",
 		"My father... ",
+		"agora vai safada",
 	}
 
 	listenAddr          string
