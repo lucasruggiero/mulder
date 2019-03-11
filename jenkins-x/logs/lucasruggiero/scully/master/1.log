@@ -1,0 +1,213 @@
+Step: build-step-credential-initializer:
+
+{"level":"warn","ts":1552324089.3582213,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1552324089.3596988,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-0:
+
+{"level":"warn","ts":1552324090.7911685,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1552324091.2719605,"logger":"fallback-logger","caller":"git-init/main.go:92","msg":"Successfully cloned \"https://github.com/lucasruggiero/scully.git\" @ \"master\" in path \"/workspace\""}
+Step: build-step-jenkins:
+
+Picked up _JAVA_OPTIONS: -Xmx400m
+Started
+Running in Durability level: PERFORMANCE_OPTIMIZED
+  20.686 [id=25]	WARNING	i.f.k.c.i.VersionUsageUtils#alert: The client is using resource type 'customresourcedefinitions' with unstable version 'v1beta1'
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withCredentials
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (CI Build and push snapshot)
+Stage "CI Build and push snapshot" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Release)
+[Pipeline] git
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/lucasruggiero/scully.git # timeout=10
+Fetching upstream changes from https://github.com/lucasruggiero/scully.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/lucasruggiero/scully.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 8dffc928d0a31786c5c613cff20ad8b178bd85af (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 8dffc928d0a31786c5c613cff20ad8b178bd85af
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 8dffc928d0a31786c5c613cff20ad8b178bd85af
+Commit message: "Draft create"
+First time build. Skipping changelog.
+[Pipeline] sh
++ jx-release-version
++ echo 0.0.1
+[Pipeline] sh
++ cat VERSION
++ jx step tag --version 0.0.1
+Tag v0.0.1 created and pushed to remote origin
+[Pipeline] sh
++ npm install
+
+> puppeteer@1.12.2 install /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job/node_modules/puppeteer
+> node install.js
+
+
+Chromium downloaded to /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job/node_modules/puppeteer/.local-chromium/linux-624492
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.7 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.7: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 1981 packages in 41.924s
+[Pipeline] sh
++ CI=true DISPLAY=:99 npm test
+
+> scully@0.1.0 test /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job
+> BABEL_ENV='test' NODE_ENV='test' jest ./src/*.test.js
+
+PASS src/App.test.js
+  ✓ renders without crashing (29ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.743s
+Ran all test suites matching /.\/src\/App.test.js/i.
+[Pipeline] sh
++ cat VERSION
++ export VERSION=0.0.1
++ skaffold build -f skaffold.yaml
+time="2019-03-11T17:10:58Z" level=warning msg="config version (skaffold/v1beta2) out of date: upgrading to latest (skaffold/v1beta6)"
+Generating Tag for [changeme]...
+Starting build...
+Building [changeme]...
+Sending build context to Docker daemon  545.8kBSending build context to Docker daemon  3.769MBSending build context to Docker daemon  5.884MBSending build context to Docker daemon  10.65MBSending build context to Docker daemon  12.25MBSending build context to Docker daemon  14.92MBSending build context to Docker daemon  17.07MBSending build context to Docker daemon   19.7MBSending build context to Docker daemon  21.28MBSending build context to Docker daemon  24.48MBSending build context to Docker daemon  27.14MBSending build context to Docker daemon  28.19MBSending build context to Docker daemon  30.85MBSending build context to Docker daemon   34.6MBSending build context to Docker daemon  37.25MBSending build context to Docker daemon  39.91MBSending build context to Docker daemon  42.58MBSending build context to Docker daemon  46.26MBSending build context to Docker daemon  50.52MBSending build context to Docker daemon  51.05MBSending build context to Docker daemon  53.16MBSending build context to Docker daemon  57.98MBSending build context to Docker daemon  60.66MBSending build context to Docker daemon  62.78MBSending build context to Docker daemon  66.49MBSending build context to Docker daemon   69.7MBSending build context to Docker daemon  72.85MBSending build context to Docker daemon  74.45MBSending build context to Docker daemon  76.06MBSending build context to Docker daemon  78.72MBSending build context to Docker daemon  83.57MBSending build context to Docker daemon  86.23MBSending build context to Docker daemon  93.21MBSending build context to Docker daemon  100.2MBSending build context to Docker daemon  105.5MBSending build context to Docker daemon    111MBSending build context to Docker daemon  115.3MBSending build context to Docker daemon  122.2MBSending build context to Docker daemon  127.1MBSending build context to Docker daemon  133.5MBSending build context to Docker daemon  138.3MBSending build context to Docker daemon  143.1MBSending build context to Docker daemon  145.8MBSending build context to Docker daemon    148MBSending build context to Docker daemon  149.6MBSending build context to Docker daemon  152.3MBSending build context to Docker daemon  158.2MBSending build context to Docker daemon    163MBSending build context to Docker daemon  169.5MBSending build context to Docker daemon  174.3MBSending build context to Docker daemon  180.2MBSending build context to Docker daemon  188.5MBSending build context to Docker daemon  193.9MBSending build context to Docker daemon  206.7MBSending build context to Docker daemon  219.5MBSending build context to Docker daemon  231.8MBSending build context to Docker daemon  244.6MBSending build context to Docker daemon  257.4MBSending build context to Docker daemon  271.9MBSending build context to Docker daemon  284.7MBSending build context to Docker daemon  299.2MBSending build context to Docker daemon  314.8MBSending build context to Docker daemon  330.4MBSending build context to Docker daemon    346MBSending build context to Docker daemon  357.7MBSending build context to Docker daemon  364.9MBSending build context to Docker daemon  372.7MBSending build context to Docker daemon  380.5MBSending build context to Docker daemon  396.7MBSending build context to Docker daemon  412.3MBSending build context to Docker daemon  426.7MBSending build context to Docker daemon  441.1MBSending build context to Docker daemon  455.8MBSending build context to Docker daemon  469.4MBSending build context to Docker daemon  475.4MBSending build context to Docker daemon  480.9MBSending build context to Docker daemon  495.9MBSending build context to Docker daemon  503.6MBSending build context to Docker daemon    509MBSending build context to Docker daemon  517.2MBSending build context to Docker daemon  518.9MBSending build context to Docker daemon  521.6MBSending build context to Docker daemon  525.4MBSending build context to Docker daemon  526.4MBSending build context to Docker daemon  529.1MBSending build co
+ntext to Docker daemon  530.7MBSending build context to Docker daemon  531.7MBSending build context to Docker daemon  532.3MBSending build context to Docker daemon  534.4MBSending build context to Docker daemon  535.4MBSending build context to Docker daemon  536.5MBSending build context to Docker daemon  537.5MBSending build context to Docker daemon  538.6MBSending build context to Docker daemon  541.3MBSending build context to Docker daemon  543.4MBSending build context to Docker daemon  547.1MBSending build context to Docker daemon    552MBSending build context to Docker daemon  555.2MBSending build context to Docker daemon  558.4MBSending build context to Docker daemon    559MBSending build context to Docker daemon    560MBSending build context to Docker daemon  561.1MBSending build context to Docker daemon  562.1MBSending build context to Docker daemon  563.2MBSending build context to Docker daemon  563.7MBSending build context to Docker daemon  564.3MBSending build context to Docker daemon  565.3MBSending build context to Docker daemon  565.9MBSending build context to Docker daemon  567.5MBSending build context to Docker daemon  569.3MB
+Step 1/6 : FROM node:9-slim
+9-slim: Pulling from library/node
+5bba3ecb4cd6: Pulling fs layer
+196b8e3c919d: Pulling fs layer
+7d083412657b: Pulling fs layer
+a88538b9cd05: Pulling fs layer
+e01bd28a434b: Pulling fs layer
+a88538b9cd05: Waiting
+e01bd28a434b: Waiting
+196b8e3c919d: Verifying Checksum
+196b8e3c919d: Download complete
+7d083412657b: Verifying Checksum
+7d083412657b: Download complete
+e01bd28a434b: Verifying Checksum
+e01bd28a434b: Download complete
+a88538b9cd05: Verifying Checksum
+a88538b9cd05: Download complete
+5bba3ecb4cd6: Verifying Checksum
+5bba3ecb4cd6: Download complete
+5bba3ecb4cd6: Pull complete
+196b8e3c919d: Pull complete
+7d083412657b: Pull complete
+a88538b9cd05: Pull complete
+e01bd28a434b: Pull complete
+Digest: sha256:288b29c1925d65b2d7d8701f8ada201e7dcd066438c0fb4299c35dff129b893f
+Status: Downloaded newer image for node:9-slim
+ ---> e20bb4abe4ee
+Step 2/6 : ENV PORT 8080
+ ---> Running in 81a333681a7a
+ ---> 57a3bf0e79b9
+Step 3/6 : EXPOSE 8080
+ ---> Running in a3778b60b838
+ ---> 0306faf8e335
+Step 4/6 : WORKDIR /usr/src/app
+ ---> 4b300d19f092
+Step 5/6 : COPY . .
+ ---> d912144eb1fa
+Step 6/6 : CMD npm start
+ ---> Running in 4172b1fac257
+ ---> e35be0e7f73a
+Successfully built e35be0e7f73a
+The push refers to a repository [10.27.240.4:5000/lucasruggiero/scully]
+b156442a6792: Preparing
+15049e7d9096: Preparing
+e16c226cf2a8: Preparing
+7fd597d009e4: Preparing
+7c6ab5fb7059: Preparing
+ed271eac23e9: Preparing
+156ff16f37e4: Preparing
+ed271eac23e9: Waiting
+156ff16f37e4: Waiting
+7c6ab5fb7059: Pushed
+15049e7d9096: Pushed
+e16c226cf2a8: Pushed
+ed271eac23e9: Pushed
+7fd597d009e4: Pushed
+156ff16f37e4: Pushed
+b156442a6792: Pushed
+0.0.1: digest: sha256:271e622dfcfa3062541e50d1570a1e3edf5c8e6cdd2694aa08d7d3e0acddc0aa size: 1790
+Build complete in 1m45.951100286s
+Starting test...
+Test complete in 7.13µs
+changeme -> 10.27.240.4:5000/lucasruggiero/scully:0.0.1@sha256:271e622dfcfa3062541e50d1570a1e3edf5c8e6cdd2694aa08d7d3e0acddc0aa
+[Pipeline] sh
++ cat VERSION
++ jx step post build --image 10.27.240.4:5000/lucasruggiero/scully:0.0.1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Promote to Environments)
+[Pipeline] dir
+Running in /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job/charts/scully
+[Pipeline] {
+[Pipeline] sh
++ cat ../../VERSION
++ jx step changelog --batch-mode --version v0.0.1
+Converted /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job/charts/scully to an unshallow repository
+Generating change log from git ref 8dffc928d0a31786c5c613cff20ad8b178bd85af => 15d1b7343b54b2d4d174535e905745bb1249b41c
+Failed to enrich commits with issues: User.jenkins.io "" is invalid: metadata.name: Required value: name or generateName is required
+Failed to enrich commits with issues: User.jenkins.io "" is invalid: metadata.name: Required value: name or generateName is required
+Finding issues in commit messages using git format
+No release found for lucasruggiero/scully and tag v0.0.1 so creating a new release
+Updated the release information at https://github.com/lucasruggiero/scully/releases/tag/v0.0.1
+generated: /tmp/jenkinsTests.tmp/jenkins5792664522908001009test/workspace/job/charts/scully/templates/release.yaml
+Created Release scully-0-0-1 resource in namespace jx
+Updating PipelineActivity lucasruggiero-scully-master-1 with version 0.0.1
+Updated PipelineActivities lucasruggiero-scully-master-1 with release notes URL: https://github.com/lucasruggiero/scully/releases/tag/v0.0.1
+[Pipeline] sh
++ jx step helm release
+No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: jenkins-x http://chartmuseum.jenkins-x.io
+Successfully added Helm repository jenkins-x.
+Adding missing Helm repo: releases http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository releases.
+No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Uploading chart file scully-0.0.1.tgz to http://jenkins-x-chartmuseum:8080/api/charts
+Received 201 response: {"saved":true}
+[Pipeline] sh
++ cat ../../VERSION
++ jx promote -b --all-auto --timeout 1h --version 0.0.1
+prow based install so skip waiting for the merge of Pull Requests to go green as currently there is an issue with gettingstatuses from the PR, see https://github.com/jenkins-x/jx/issues/2410
+Promoting app scully version 0.0.1 to namespace jx-staging
+Created Pull Request: https://github.com/lucasruggiero/environment-jx-rocks-staging/pull/10
+
+Pull Request https://github.com/lucasruggiero/environment-jx-rocks-staging/pull/10 is merged at sha e59e5f261ab72e038811f1422097389386388f85
+Pull Request merged but we are not waiting for the update pipeline to complete!
+Could not find the service URL in namespace jx-staging for names scully, jx-scully, jx-staging-scully
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
